@@ -1,0 +1,29 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MUSCI" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Your git repository, played as music
+    - generic [ref=e5]: "@aarogyarijal — all contributions"
+  - img [ref=e7]:
+    - generic [ref=e1003]:
+      - generic [ref=e1004]: "2021"
+      - generic [ref=e1005]: "2022"
+      - generic [ref=e1006]: "2023"
+      - generic [ref=e1007]: "2024"
+      - generic [ref=e1008]: "2025"
+      - generic [ref=e1009]: "2026"
+  - generic [ref=e1010]:
+    - generic [ref=e1011]:
+      - button "PAUSE" [active] [ref=e1032] [cursor=pointer]
+      - generic [ref=e1013]: 0:00 / 1:30
+    - generic [ref=e1014]:
+      - button "Pad" [ref=e1015] [cursor=pointer]: Pad
+      - button "Pulse" [ref=e1017] [cursor=pointer]: Pulse
+      - button "Commits" [ref=e1019] [cursor=pointer]: Commits
+      - button "Contributors" [ref=e1021] [cursor=pointer]: Contributors
+      - button "Pull Requests" [ref=e1023] [cursor=pointer]: Pull Requests
+      - button "CI Runs" [ref=e1025] [cursor=pointer]: CI Runs
+    - generic [ref=e1027]:
+      - generic [ref=e1028]: Speed
+      - slider [ref=e1029]: "1"
+      - generic [ref=e1030]: 1×
+  - generic [ref=e1031]: Pad → ambient bed (always on) | Pulse → 8th-note tick (rhythmic spine) | Commits → arpeggio (pitch = churn) | Contributors → polyphonic voices | PRs → drone chords | CI Runs → drums (failure = dissonance)

@@ -1,0 +1,19 @@
+{
+  "name": "musci",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "extract": "bash scripts/extract.sh"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "tone": "^15.0.4"
+  },
+  "devDependencies": {
+    "vite": "^6.3.3"
+  }
+}

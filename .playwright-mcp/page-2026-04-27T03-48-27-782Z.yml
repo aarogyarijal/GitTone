@@ -1,0 +1,20 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - heading "MUSCI" [level=1] [ref=e3]
+    - paragraph [ref=e4]: Your git repository, played as music
+    - generic [ref=e5]: "@aarogyarijal — all contributions"
+  - img [ref=e7]
+  - generic [ref=e1003]:
+    - generic [ref=e1004]:
+      - button "PAUSE" [active] [ref=e1021] [cursor=pointer]
+      - generic [ref=e1006]: 0:00 / 1:30
+    - generic [ref=e1007]:
+      - button "Commits" [ref=e1008] [cursor=pointer]: Commits
+      - button "Contributors" [ref=e1010] [cursor=pointer]: Contributors
+      - button "Pull Requests" [ref=e1012] [cursor=pointer]: Pull Requests
+      - button "CI Runs" [ref=e1014] [cursor=pointer]: CI Runs
+    - generic [ref=e1016]:
+      - generic [ref=e1017]: Speed
+      - slider [ref=e1018]: "1"
+      - generic [ref=e1019]: 1×
+  - generic [ref=e1020]: Commits → arpeggio (pitch = churn, instrument = file type) | Contributors → polyphonic voices | PRs → drone chords | CI Runs → drums (failure = dissonance)

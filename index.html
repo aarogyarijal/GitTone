@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitTone — Git as Music</title>
+  <style>
+    :root {
+      --bg: #0d0d12;
+      --surface: #16161f;
+      --accent: #7c6af7;
+      --accent2: #4fcfb4;
+      --warn: #f76a6a;
+      --text: #e2e2ef;
+      --muted: #888899;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+      gap: 24px;
+    }
+
+    header {
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+    header p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    #repo-label {
+      font-size: 0.78rem;
+      color: var(--accent2);
+      margin-top: 4px;
+    }
+
+    /* Timeline canvas */
+    #timeline-container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+    #timeline-svg {
+      display: block;
+      width: 100%;
+    }
+
+    /* Controls */
+    #controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    #transport-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    #play-btn {
+      padding: 12px 36px;
+      border: 2px solid var(--accent);
+      border-radius: 40px;
+      background: transparent;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: background 0.15s, color 0.15s;
+    }
+    #play-btn:hover { background: var(--accent); color: #fff; }
+    #play-btn.playing { border-color: var(--accent2); color: var(--accent2); }
+    #play-btn.playing:hover { background: var(--accent2); color: #000; }
+
+    #time-display {
+      color: var(--muted);
+      font-size: 0.8rem;
+      min-width: 90px;
+      text-align: right;
+    }
+
+    /* Speed */
+    #speed-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    #speed-slider { width: 120px; accent-color: var(--accent); }
+
+    /* Loading */
+    #loading {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    #loading.hidden { display: none; }
+
+    /* Legend */
+    #legend {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.7;
+    }
+    #legend span { color: var(--text); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GitTone</h1>
+    <p>Git repository, played as music</p>
+    <div id="repo-label">Loading…</div>
+  </header>
+
+  <div id="loading">Fetching data…</div>
+
+  <div id="timeline-container" style="display:none">
+    <svg id="timeline-svg" height="120"></svg>
+  </div>
+
+  <div id="controls" style="display:none">
+    <div id="transport-row">
+      <button id="play-btn">PLAY</button>
+      <div id="time-display">0:00 / 0:00</div>
+    </div>
+
+    <div id="speed-row">
+      <span>Speed</span>
+      <input id="speed-slider" type="range" min="0.25" max="4" step="0.25" value="1" />
+      <span id="speed-label">1×</span>
+    </div>
+  </div>
+
+<!-- 
+  <div id="legend">
+    <span>Pad</span> → ambient bed (always on) &nbsp;|&nbsp;
+    <span>Pulse</span> → 8th-note tick (rhythmic spine) &nbsp;|&nbsp;
+    <span>Commits</span> → arpeggio (pitch = churn) &nbsp;|&nbsp;
+    <span>Contributors</span> → polyphonic voices &nbsp;|&nbsp;
+    <span>PRs</span> → drone chords &nbsp;|&nbsp;
+    <span>CI Runs</span> → drums (failure = dissonance)
+  </div>
+-->
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
