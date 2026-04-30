@@ -116,6 +116,141 @@ print(json.dumps(data, indent=2))
   done
   echo "    $(jq length "$DATA_DIR/runs.json") runs"
 
+  # ─── GitLab augment (optional) ────────────────────────────────────────────
+  if command -v glab >/dev/null 2>&1 && glab auth status >/dev/null 2>&1; then
+    echo "  → augmenting with GitLab…"
+    GL_USER=$(glab api user 2>/dev/null | jq -r '.username // empty')
+    GL_EMAIL=$(glab api user 2>/dev/null | jq -r '.commit_email // .email // empty')
+    GL_NAME=$(glab api user 2>/dev/null | jq -r '.name // empty')
+    if [ -n "$GL_USER" ]; then
+      echo "    GitLab user: $GL_USER (commits by: ${GL_NAME} <${GL_EMAIL}>)"
+
+      # Contributed projects → "id|path_with_namespace"
+      # --paginate emits one JSON array per page; jq -s slurps then add concatenates them.
+      PROJECTS=$(glab api --paginate "users/$GL_USER/contributed_projects?per_page=100" 2>/dev/null \
+        | jq -rs 'add | .[] | "\(.id)|\(.path_with_namespace)"')
+
+      # 1. Commits per GitLab project
+      ALL_GL_COMMITS='[]'
+      while IFS='|' read -r PID PATH_NS; do
+        [ -z "$PID" ] && continue
+        echo "    fetching commits for ${PATH_NS}…"
+        # Don't use ?author= — GitLab matches commit author_name verbatim (case-sensitive,
+        # whitespace-sensitive). Filter client-side by author_email instead, which is stable.
+        # Some commit messages contain raw control bytes inside JSON strings that jq refuses
+        # to parse. Re-encode through Python to escape them properly.
+        RAW=$(glab api --paginate "projects/$PID/repository/commits?per_page=100" 2>/dev/null \
+          | python3 -c "
+import sys, json
+text = sys.stdin.read()
+dec = json.JSONDecoder(strict=False)
+flat, i, n = [], 0, len(text)
+while i < n:
+    while i < n and text[i] in ' \t\r\n': i += 1
+    if i >= n: break
+    try:
+        val, end = dec.raw_decode(text, i)
+        if isinstance(val, list): flat.extend(val)
+        i = end
+    except Exception:
+        break
+print(json.dumps(flat))
+" || echo "[]")
+        MAPPED=$(echo "$RAW" | jq --arg repo "gitlab:${PATH_NS}" --arg email "$GL_EMAIL" --arg name "$GL_NAME" '
+          map(select(.author_email == $email or .committer_email == $email or .author_name == $name))
+          | [.[] | {
+          hash: .id,
+          timestamp: (.created_at | sub("\\.[0-9]+"; "") | sub("[+-][0-9]{2}:[0-9]{2}$"; "Z") | fromdateiso8601),
+          author: .author_name,
+          repo: $repo,
+          linesAdded: 0,
+          linesDeleted: 0,
+          files: []
+        }]' 2>/dev/null || echo "[]")
+        ALL_GL_COMMITS=$(jq -s 'add' <(echo "$ALL_GL_COMMITS") <(echo "$MAPPED"))
+      done <<< "$PROJECTS"
+
+      GL_COMMIT_COUNT=$(echo "$ALL_GL_COMMITS" | jq length)
+      echo "    $GL_COMMIT_COUNT GitLab commits"
+
+      if [ "$GL_COMMIT_COUNT" -gt 0 ]; then
+        # Merge into commits.json, sort chronologically
+        jq -s 'add | sort_by(.timestamp)' "$DATA_DIR/commits.json" <(echo "$ALL_GL_COMMITS") \
+          > "$DATA_DIR/commits.tmp.json"
+        mv "$DATA_DIR/commits.tmp.json" "$DATA_DIR/commits.json"
+
+        # Regenerate contributors (each repo = one voice) from combined commits
+        jq '
+          group_by(.repo) |
+          map({
+            author: .[0].repo,
+            total:  length,
+            weeks: (
+              group_by((.timestamp / 604800 | floor)) |
+              map({
+                w: (.[0].timestamp / 604800 | floor) * 604800,
+                a: 0, d: 0, c: length
+              })
+            )
+          }) | sort_by(-.total)
+        ' "$DATA_DIR/commits.json" > "$DATA_DIR/contributors.json"
+      fi
+
+      # 2. Merged MRs
+      echo "    fetching merged MRs…"
+      GL_MRS=$(glab api --paginate "merge_requests?scope=all&author_username=$GL_USER&state=merged&per_page=100" 2>/dev/null \
+        | jq -s 'add | [.[] | {
+            number: .iid,
+            title: .title,
+            createdAt: .created_at,
+            mergedAt: .merged_at,
+            additions: 0,
+            deletions: 0,
+            repo: ("gitlab:" + (.references.full | split("!")[0])),
+            reviewDecision: null
+          }]')
+      GL_MR_COUNT=$(echo "$GL_MRS" | jq length)
+      echo "    $GL_MR_COUNT merged GitLab MRs"
+      if [ "$GL_MR_COUNT" -gt 0 ]; then
+        jq -s 'add' "$DATA_DIR/pulls.json" <(echo "$GL_MRS") > "$DATA_DIR/pulls.tmp.json"
+        mv "$DATA_DIR/pulls.tmp.json" "$DATA_DIR/pulls.json"
+      fi
+
+      # 3. Pipelines from top 5 GitLab projects by commit count
+      echo "    fetching pipelines (top 5 GitLab projects)…"
+      TOP_GL=$(while IFS='|' read -r PID PATH_NS; do
+        [ -z "$PID" ] && continue
+        N=$(jq --arg r "gitlab:${PATH_NS}" '[.[] | select(.repo == $r)] | length' "$DATA_DIR/commits.json")
+        printf '%s\t%s\t%s\n' "$N" "$PID" "${PATH_NS}"
+      done <<< "$PROJECTS" | sort -k1,1 -nr | head -5)
+
+      while IFS=$'\t' read -r N PID PATH_NS; do
+        [ -z "$PID" ] && continue
+        echo "    fetching pipelines for ${PATH_NS}…"
+        # Cap to most-recent 200 pipelines per project (no --paginate). Big projects
+        # can have tens of thousands of pipelines, which would drown out commits/MRs.
+        RAW=$(glab api "projects/$PID/pipelines?per_page=100&page=1" 2>/dev/null || echo "[]")
+        RAW2=$(glab api "projects/$PID/pipelines?per_page=100&page=2" 2>/dev/null || echo "[]")
+        MAPPED=$(jq -s 'add | [.[] | {
+          databaseId: .id,
+          name: "pipeline",
+          status: .status,
+          conclusion: (if .status == "success" then "success" elif .status == "failed" then "failure" else "skipped" end),
+          createdAt: .created_at,
+          updatedAt: (.updated_at // .created_at),
+          event: "pipeline"
+        }]' <(echo "$RAW") <(echo "$RAW2"))
+        # Append + dedupe by databaseId so re-runs don't double up.
+        jq -s 'add | group_by(.databaseId) | map(.[0]) | sort_by(.createdAt)' \
+          "$DATA_DIR/runs.json" <(echo "$MAPPED") > "$DATA_DIR/runs.tmp.json"
+        mv "$DATA_DIR/runs.tmp.json" "$DATA_DIR/runs.json"
+      done <<< "$TOP_GL"
+      echo "    $(jq length "$DATA_DIR/runs.json") total runs (GitHub + GitLab)"
+    fi
+  else
+    echo "  → skipping GitLab (glab not installed/authenticated)"
+  fi
+
   # Meta
   gh api "/users/$ME" \
     --jq '{repo: ("@" + .login + " — all contributions"), description: .bio,

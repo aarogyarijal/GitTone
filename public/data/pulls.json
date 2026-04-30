@@ -508,5 +508,1105 @@
     "deletions": 0,
     "repo": "TheOdinProject/curriculum",
     "reviewDecision": null
+  },
+  {
+    "number": 724,
+    "title": "Add file mentions, inline upload, and contributor attachment permissions (closes #502)",
+    "createdAt": "2026-04-01T21:04:17.670Z",
+    "mergedAt": "2026-04-08T20:19:45.751Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 719,
+    "title": "Add mention hover cards and non-editable mention chips in WYSIWYG editor",
+    "createdAt": "2026-03-25T16:47:11.075Z",
+    "mergedAt": "2026-03-25T20:24:37.647Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 716,
+    "title": "@mention feature: tag teammates anywhere + notification fix",
+    "createdAt": "2026-03-20T20:13:51.506Z",
+    "mergedAt": "2026-03-24T12:37:33.852Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 608,
+    "title": "Cleaned up Dashboard UI and implemented activity sidebar",
+    "createdAt": "2026-02-25T21:33:24.073Z",
+    "mergedAt": "2026-02-26T17:01:10.465Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 607,
+    "title": "Optimize Dashboard Queries",
+    "createdAt": "2026-02-25T21:32:26.199Z",
+    "mergedAt": "2026-02-26T16:47:14.793Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 606,
+    "title": "Allow post creation after project completion",
+    "createdAt": "2026-02-25T21:25:46.225Z",
+    "mergedAt": "2026-03-04T15:16:22.250Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 548,
+    "title": "Fix projects task count and progress calculation",
+    "createdAt": "2026-02-11T17:54:49.173Z",
+    "mergedAt": "2026-02-11T18:03:29.865Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 544,
+    "title": "Redirect Request Review card click on dashboard to task page",
+    "createdAt": "2026-02-11T06:21:26.414Z",
+    "mergedAt": "2026-02-11T18:02:44.978Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 505,
+    "title": "Dashboard",
+    "createdAt": "2026-02-04T06:58:59.414Z",
+    "mergedAt": "2026-02-05T18:00:05.432Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 480,
+    "title": "fix foreign key constraint for project intake type_id to reference project_types",
+    "createdAt": "2026-01-07T21:07:58.630Z",
+    "mergedAt": "2026-01-08T17:00:57.136Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 473,
+    "title": "Add detailed PHPDoc comments for all public methods",
+    "createdAt": "2025-11-19T21:22:18.199Z",
+    "mergedAt": "2025-12-12T19:47:28.997Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpidev/project-charlotte",
+    "reviewDecision": null
+  },
+  {
+    "number": 2545,
+    "title": "Expert updates",
+    "createdAt": "2025-11-05T04:41:36.680Z",
+    "mergedAt": "2025-12-09T18:54:10.411Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 5,
+    "title": "Added maximum bytes limit",
+    "createdAt": "2025-06-24T15:17:23.814Z",
+    "mergedAt": "2025-06-24T15:26:40.026Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/translate",
+    "reviewDecision": null
+  },
+  {
+    "number": 61,
+    "title": "[All] Podcasts",
+    "createdAt": "2025-06-24T06:48:19.458Z",
+    "mergedAt": "2025-06-24T06:52:30.468Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 60,
+    "title": "[All] Podcasts",
+    "createdAt": "2025-06-24T06:36:39.376Z",
+    "mergedAt": "2025-06-24T06:41:00.859Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 58,
+    "title": "Minor Bug Fixes",
+    "createdAt": "2025-06-10T19:40:46.742Z",
+    "mergedAt": "2025-06-10T19:41:09.490Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 57,
+    "title": "Minor fix",
+    "createdAt": "2025-06-10T19:16:53.834Z",
+    "mergedAt": "2025-06-10T19:22:07.707Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 56,
+    "title": "Announcements [All Locales]",
+    "createdAt": "2025-05-05T20:09:25.246Z",
+    "mergedAt": "2025-05-05T20:29:19.355Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 55,
+    "title": "Interaction Model Translator",
+    "createdAt": "2025-05-05T18:23:37.120Z",
+    "mergedAt": "2025-05-05T18:52:43.744Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 54,
+    "title": "Fixed invalid function name",
+    "createdAt": "2025-03-24T22:04:13.100Z",
+    "mergedAt": "2025-03-24T22:11:25.557Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 53,
+    "title": "Announcements [EN]",
+    "createdAt": "2025-03-24T21:16:11.652Z",
+    "mergedAt": "2025-03-24T21:38:26.677Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 52,
+    "title": "Announcements",
+    "createdAt": "2025-03-24T19:10:04.216Z",
+    "mergedAt": "2025-03-24T19:14:26.196Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 51,
+    "title": "Announcements",
+    "createdAt": "2025-03-20T23:54:58.264Z",
+    "mergedAt": "2025-03-21T00:03:26.426Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 4,
+    "title": "Empty String Translation Handling",
+    "createdAt": "2025-03-20T17:44:08.446Z",
+    "mergedAt": "2025-03-24T22:26:30.169Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/translate",
+    "reviewDecision": null
+  },
+  {
+    "number": 3,
+    "title": "Empty string",
+    "createdAt": "2025-03-20T16:55:49.113Z",
+    "mergedAt": "2025-03-20T17:15:19.195Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/translate",
+    "reviewDecision": null
+  },
+  {
+    "number": 32,
+    "title": "Chatbot gui",
+    "createdAt": "2024-09-17T19:33:36.884Z",
+    "mergedAt": "2024-10-01T20:40:09.509Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 31,
+    "title": "Chatbot gui",
+    "createdAt": "2024-09-13T16:39:02.879Z",
+    "mergedAt": "2024-09-13T16:40:35.412Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 30,
+    "title": "Chatbot MVP",
+    "createdAt": "2024-08-29T18:57:23.379Z",
+    "mergedAt": "2024-08-29T18:57:33.928Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 29,
+    "title": "List Menu",
+    "createdAt": "2024-08-26T18:12:03.050Z",
+    "mergedAt": "2024-10-02T16:09:15.954Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 28,
+    "title": "List menu",
+    "createdAt": "2024-08-23T17:16:43.074Z",
+    "mergedAt": "2024-08-26T17:49:16.363Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 26,
+    "title": "Article nav",
+    "createdAt": "2024-08-20T17:55:00.918Z",
+    "mergedAt": "2024-08-20T17:57:33.951Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 25,
+    "title": "Chunking",
+    "createdAt": "2024-08-13T15:28:55.689Z",
+    "mergedAt": "2024-08-13T15:29:57.343Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 24,
+    "title": "Fixed Title overflow and layout in play screen",
+    "createdAt": "2024-08-13T15:13:38.321Z",
+    "mergedAt": "2024-08-13T15:31:31.910Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 23,
+    "title": "Chunking",
+    "createdAt": "2024-08-13T14:54:34.545Z",
+    "mergedAt": "2024-08-13T14:57:17.843Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 22,
+    "title": "Chunking",
+    "createdAt": "2024-08-13T14:47:09.795Z",
+    "mergedAt": "2024-08-13T14:51:50.051Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 21,
+    "title": "Fixed play button on launch screen",
+    "createdAt": "2024-08-06T13:16:07.890Z",
+    "mergedAt": "2024-08-13T15:05:08.300Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 17,
+    "title": "Fixed Navigation Buttons",
+    "createdAt": "2024-07-30T16:21:53.014Z",
+    "mergedAt": "2024-07-30T18:34:46.431Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpi-alexa-skill",
+    "reviewDecision": null
+  },
+  {
+    "number": 1740,
+    "title": "Gitlab2148",
+    "createdAt": "2024-07-26T20:57:30.547Z",
+    "mergedAt": "2024-07-30T13:19:08.302Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1718,
+    "title": "Added pre-commit Hook for TS",
+    "createdAt": "2024-07-16T18:19:44.631Z",
+    "mergedAt": "2024-07-16T20:37:30.351Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1715,
+    "title": "Optimized gulpfile for ts files",
+    "createdAt": "2024-07-15T21:05:05.120Z",
+    "mergedAt": "2024-07-16T17:57:25.358Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1712,
+    "title": "Changed js to ts and resolved related errors",
+    "createdAt": "2024-07-12T16:23:01.983Z",
+    "mergedAt": "2024-07-15T12:45:25.100Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1711,
+    "title": "Gitlab2133",
+    "createdAt": "2024-07-12T16:13:28.031Z",
+    "mergedAt": "2024-07-15T12:44:48.802Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1703,
+    "title": "Changed media to container queries",
+    "createdAt": "2024-07-03T20:03:54.438Z",
+    "mergedAt": "2024-07-12T12:58:39.438Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1700,
+    "title": "ts/wpi-emergency-button",
+    "createdAt": "2024-06-28T19:42:24.152Z",
+    "mergedAt": "2024-07-11T20:32:52.606Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1699,
+    "title": "ts/search-page",
+    "createdAt": "2024-06-28T19:42:16.946Z",
+    "mergedAt": "2024-07-11T20:15:48.883Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1698,
+    "title": "Ts/wpi",
+    "createdAt": "2024-06-28T19:42:12.565Z",
+    "mergedAt": "2024-07-11T20:12:34.773Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1697,
+    "title": "Ts/users",
+    "createdAt": "2024-06-28T19:42:08.120Z",
+    "mergedAt": "2024-07-11T20:09:45.023Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1696,
+    "title": "Ts/site menu",
+    "createdAt": "2024-06-28T19:42:04.142Z",
+    "mergedAt": "2024-07-11T20:08:32.631Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1695,
+    "title": "Ts/share",
+    "createdAt": "2024-06-28T19:41:59.735Z",
+    "mergedAt": "2024-07-10T16:02:13.697Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1694,
+    "title": "Ts/patents",
+    "createdAt": "2024-06-28T19:41:55.665Z",
+    "mergedAt": "2024-07-10T15:55:59.358Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1693,
+    "title": "Ts/mega menu",
+    "createdAt": "2024-06-28T19:41:51.455Z",
+    "mergedAt": "2024-07-10T15:54:26.711Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1692,
+    "title": "Ts/library search",
+    "createdAt": "2024-06-28T19:41:46.940Z",
+    "mergedAt": "2024-07-10T15:52:41.389Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1691,
+    "title": "Ts/latest news",
+    "createdAt": "2024-06-28T19:41:42.214Z",
+    "mergedAt": "2024-07-10T15:49:45.093Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1690,
+    "title": "Ts/header",
+    "createdAt": "2024-06-28T19:41:37.225Z",
+    "mergedAt": "2024-07-10T15:46:16.026Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1689,
+    "title": "Ts/graduate applications",
+    "createdAt": "2024-06-28T19:41:32.310Z",
+    "mergedAt": "2024-07-10T15:45:05.438Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1688,
+    "title": "Ts/flip ne block",
+    "createdAt": "2024-06-28T19:41:28.334Z",
+    "mergedAt": "2024-07-10T15:43:38.408Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1687,
+    "title": "Ts/featured links",
+    "createdAt": "2024-06-28T19:41:23.767Z",
+    "mergedAt": "2024-07-10T15:42:16.405Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1686,
+    "title": "Ts/events accordian",
+    "createdAt": "2024-06-28T19:41:18.212Z",
+    "mergedAt": "2024-07-10T15:36:22.562Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1685,
+    "title": "Ts/cookies",
+    "createdAt": "2024-06-28T19:41:13.784Z",
+    "mergedAt": "2024-07-10T14:56:27.016Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1684,
+    "title": "Ts/breadcrumbs",
+    "createdAt": "2024-06-28T19:41:08.550Z",
+    "mergedAt": "2024-07-10T14:55:05.958Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1683,
+    "title": "Ts/banner video",
+    "createdAt": "2024-06-28T19:41:03.767Z",
+    "mergedAt": "2024-07-10T14:54:32.220Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1682,
+    "title": "Ts/audio",
+    "createdAt": "2024-06-28T19:40:58.584Z",
+    "mergedAt": "2024-07-10T14:39:58.849Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1681,
+    "title": "Ts/anchors",
+    "createdAt": "2024-06-28T19:40:52.638Z",
+    "mergedAt": "2024-07-10T14:33:27.382Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1680,
+    "title": "Ts/anchor",
+    "createdAt": "2024-06-28T19:40:46.996Z",
+    "mergedAt": "2024-07-09T17:23:47.025Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1677,
+    "title": "Typescript configuration and changes to accordion",
+    "createdAt": "2024-06-25T13:27:43.426Z",
+    "mergedAt": "2024-06-28T19:30:47.243Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1670,
+    "title": "Gitlab #2123 5",
+    "createdAt": "2024-06-20T17:51:22.356Z",
+    "mergedAt": "2024-06-26T17:38:24.698Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1669,
+    "title": "Gitlab2123 4",
+    "createdAt": "2024-06-20T15:43:41.751Z",
+    "mergedAt": "2024-06-26T17:30:35.903Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1666,
+    "title": "Gitlab2123 3",
+    "createdAt": "2024-06-18T18:32:38.207Z",
+    "mergedAt": "2024-06-20T14:25:09.188Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1665,
+    "title": "Gitlab2123 2 #2123",
+    "createdAt": "2024-06-18T15:34:43.217Z",
+    "mergedAt": "2024-06-20T14:23:16.573Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1664,
+    "title": "Fixed lint errors",
+    "createdAt": "2024-06-18T13:54:22.550Z",
+    "mergedAt": "2024-06-20T12:44:31.075Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1658,
+    "title": "Moved chevron to left",
+    "createdAt": "2024-06-12T18:01:40.945Z",
+    "mergedAt": "2024-06-13T14:28:14.547Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1657,
+    "title": "updated Media Banner Item styles",
+    "createdAt": "2024-06-12T18:01:34.725Z",
+    "mergedAt": "2024-06-13T14:07:03.628Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1654,
+    "title": "Newfix/wpi",
+    "createdAt": "2024-06-11T18:06:57.474Z",
+    "mergedAt": "2024-06-13T12:44:29.927Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1653,
+    "title": "Newfix/users",
+    "createdAt": "2024-06-11T18:06:49.411Z",
+    "mergedAt": "2024-06-13T12:43:50.935Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1652,
+    "title": "Newfix/solo link",
+    "createdAt": "2024-06-11T18:06:41.983Z",
+    "mergedAt": "2024-06-13T12:39:38.931Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1651,
+    "title": "Newfix/site menu",
+    "createdAt": "2024-06-11T18:06:34.346Z",
+    "mergedAt": "2024-06-13T12:36:06.960Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1650,
+    "title": "Newfix/share",
+    "createdAt": "2024-06-11T18:06:25.939Z",
+    "mergedAt": "2024-06-13T12:31:32.295Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1649,
+    "title": "Newfix/search page",
+    "createdAt": "2024-06-11T18:06:17.061Z",
+    "mergedAt": "2024-06-12T21:44:37.754Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1648,
+    "title": "Newfix/promo",
+    "createdAt": "2024-06-11T18:06:06.260Z",
+    "mergedAt": "2024-06-12T21:38:53.772Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1647,
+    "title": "Newfix/patents",
+    "createdAt": "2024-06-11T18:05:59.176Z",
+    "mergedAt": "2024-06-12T21:38:20.259Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1646,
+    "title": "Newfix/mini profile",
+    "createdAt": "2024-06-11T18:05:52.701Z",
+    "mergedAt": "2024-06-12T21:38:03.273Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1645,
+    "title": "Newfix/mega menu",
+    "createdAt": "2024-06-11T18:05:34.573Z",
+    "mergedAt": "2024-06-12T20:58:16.714Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1644,
+    "title": "Newfix/library search",
+    "createdAt": "2024-06-11T18:05:27.029Z",
+    "mergedAt": "2024-06-12T20:57:55.257Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1643,
+    "title": "Newfix/latest news",
+    "createdAt": "2024-06-11T18:05:20.887Z",
+    "mergedAt": "2024-06-12T20:36:59.498Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1642,
+    "title": "Newfix/hero video",
+    "createdAt": "2024-06-11T18:05:14.734Z",
+    "mergedAt": "2024-06-12T20:19:14.649Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1641,
+    "title": "Newfix/graduate applications",
+    "createdAt": "2024-06-11T18:05:05.524Z",
+    "mergedAt": "2024-06-12T20:17:02.462Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1640,
+    "title": "Newfix/flip ne block",
+    "createdAt": "2024-06-11T18:04:59.810Z",
+    "mergedAt": "2024-06-12T20:00:54.004Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1639,
+    "title": "Newfix/flip block",
+    "createdAt": "2024-06-11T18:04:45.512Z",
+    "mergedAt": "2024-06-12T20:01:44.761Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1638,
+    "title": "Newfix/featured links",
+    "createdAt": "2024-06-11T18:04:38.369Z",
+    "mergedAt": "2024-06-12T19:57:33.379Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1637,
+    "title": "Newfix/events accordion",
+    "createdAt": "2024-06-11T18:04:31.546Z",
+    "mergedAt": "2024-06-12T17:11:18.568Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1636,
+    "title": "Newfix/cookies",
+    "createdAt": "2024-06-11T18:04:25.631Z",
+    "mergedAt": "2024-06-12T15:36:56.183Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1635,
+    "title": "Newfix/breadcrumbs",
+    "createdAt": "2024-06-11T18:04:18.951Z",
+    "mergedAt": "2024-06-12T15:05:47.682Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1634,
+    "title": "Newfix/banner video",
+    "createdAt": "2024-06-11T18:04:11.465Z",
+    "mergedAt": "2024-06-12T14:48:48.012Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1633,
+    "title": "Newfix/audio",
+    "createdAt": "2024-06-11T18:04:06.038Z",
+    "mergedAt": "2024-06-12T14:12:46.173Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1632,
+    "title": "Newfix/anchors",
+    "createdAt": "2024-06-11T18:03:59.445Z",
+    "mergedAt": "2024-06-12T13:20:07.269Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1631,
+    "title": "Newfix/anchor",
+    "createdAt": "2024-06-11T18:03:52.888Z",
+    "mergedAt": "2024-06-12T13:09:11.580Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1630,
+    "title": "Newfix/accordion",
+    "createdAt": "2024-06-11T18:03:05.203Z",
+    "mergedAt": "2024-06-12T13:08:16.969Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1629,
+    "title": "Added eslint-config-drupal",
+    "createdAt": "2024-06-11T17:25:34.731Z",
+    "mergedAt": "2024-06-12T13:03:27.087Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1628,
+    "title": "Container Queries #2088",
+    "createdAt": "2024-06-10T18:35:01.632Z",
+    "mergedAt": "2024-06-13T17:54:16.452Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1599,
+    "title": "Switched Icons",
+    "createdAt": "2024-05-21T18:25:14.716Z",
+    "mergedAt": "2024-05-22T13:08:27.563Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1571,
+    "title": "Gitlab2002",
+    "createdAt": "2024-04-29T15:50:09.280Z",
+    "mergedAt": "2024-05-01T18:46:13.455Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1554,
+    "title": "Added speed control to audio player",
+    "createdAt": "2024-04-11T17:09:21.328Z",
+    "mergedAt": "2024-04-26T14:38:27.161Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1548,
+    "title": "Added 'space between blocks' setting for three-col",
+    "createdAt": "2024-04-02T18:34:53.717Z",
+    "mergedAt": "2024-04-22T20:09:45.224Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1546,
+    "title": "Hide title for small screen",
+    "createdAt": "2024-04-02T17:23:56.864Z",
+    "mergedAt": "2024-04-22T19:12:12.035Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1539,
+    "title": "Gitlab1962",
+    "createdAt": "2024-03-29T18:23:51.608Z",
+    "mergedAt": "2024-04-01T14:33:31.256Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1533,
+    "title": "Removed empty media controller container",
+    "createdAt": "2024-03-19T17:28:07.519Z",
+    "mergedAt": "2024-03-22T12:29:04.894Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1508,
+    "title": "Gitlab #1945 and Gitlab #1950",
+    "createdAt": "2024-02-23T21:45:38.061Z",
+    "mergedAt": "2024-02-28T18:16:31.029Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1492,
+    "title": "Resolve \"Add new \"max-width\" option in one column layout option\"",
+    "createdAt": "2024-02-06T18:28:56.870Z",
+    "mergedAt": "2024-02-09T21:18:28.483Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1483,
+    "title": "Fixed spacing and padding",
+    "createdAt": "2024-01-29T18:12:18.551Z",
+    "mergedAt": "2024-02-09T21:18:29.037Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
+  },
+  {
+    "number": 1467,
+    "title": "fixed horizontal overflow caused by spacing between blocks",
+    "createdAt": "2024-01-11T17:52:03.569Z",
+    "mergedAt": "2024-01-11T21:48:53.209Z",
+    "additions": 0,
+    "deletions": 0,
+    "repo": "gitlab:wpiwebdevgroup/wpiedu",
+    "reviewDecision": null
   }
 ]
