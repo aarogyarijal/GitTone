@@ -16,12 +16,12 @@
 - **vite.config.js** — Minimal Vite configuration for local dev and build output.
 
 ### Data extraction and loading
-- **scripts/extract.sh** — Pulls commit, PR, contributor, run, and metadata from GitHub CLI and local git; writes normalized JSON to `data/`.
-- **data/commits.json** — Commit-level events (timestamp, files, lines added/deleted).
-- **data/contributors.json** — Weekly grouped contributor activity used for the polyphony layer.
-- **data/pulls.json** — Pull request timing and review-state data.
-- **data/runs.json** — CI run events used for percussion and stress modulation.
-- **data/meta.json** — Repo or user label shown in the interface.
+- **scripts/extract.sh** — Pulls commit, PR, contributor, run, and metadata from GitHub CLI and local git; writes normalized JSON to `public/data/` (Vite serves `public/` verbatim, so the same files are reachable at `/data/*.json` in both dev and the production build).
+- **public/data/commits.json** — Commit-level events (timestamp, files, lines added/deleted).
+- **public/data/contributors.json** — Weekly grouped contributor activity used for the polyphony layer.
+- **public/data/pulls.json** — Pull request timing and review-state data.
+- **public/data/runs.json** — CI run events used for percussion and stress modulation.
+- **public/data/meta.json** — Repo or user label shown in the interface.
 - **src/data/loader.js** — Loads the JSON files, clips to the densest 70% of activity, and exposes the resulting time range.
 
 ### Audio infrastructure
