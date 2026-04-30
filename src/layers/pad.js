@@ -2,18 +2,36 @@ import * as Tone from 'tone'
 import { makePadVoice } from '../audio/voices.js'
 import { getAudioDuration } from '../audio/transport.js'
 
+// MIDI cache so harmonic-aware layers (commits, pulls, pulse) can ask
+// "what chord is sounding right now?" without re-parsing note strings.
+let PROGRESSION_MIDI = null
+
+export function getActiveChordMidi(audioSec) {
+  if (!PROGRESSION_MIDI) {
+    PROGRESSION_MIDI = PROGRESSION.map(chord => chord.map(n => Tone.Frequency(n).toMidi()))
+  }
+  const dur = getAudioDuration() / PROGRESSION_MIDI.length
+  const idx = Math.max(0, Math.min(PROGRESSION_MIDI.length - 1, Math.floor(audioSec / dur)))
+  return PROGRESSION_MIDI[idx]
+}
+
 // Pad — a slow chord sequence sustained across the full audio duration.
 // Volume rises and falls with overall event activity (density profile).
 
 let voice = null
 
 // Four-chord loop in D dorian; each chord holds for ~22.5s of the 90s piece.
+// Drop-2 voicings (2nd-from-top voice dropped an octave) for a more open sound,
+// with smooth top-voice motion (F → F → E → C) so the chord changes glide rather than jump.
 const PROGRESSION = [
-  ['D2', 'F3', 'A3', 'C4'],   // Dm7  — minor 7th, tense/moody
-  ['G2', 'B3', 'D4', 'F4'],   // G7   — dominant 7th, pulls toward resolution
-  ['C2', 'E3', 'G3', 'B3'],   // Cmaj7 — major 7th, bright/floating
-  ['A1', 'C3', 'E3', 'G3'],   // Am7  — minor 7th, returns to darker feel
+  ['D2', 'A2', 'C4', 'F4'],   // Dm7   — drop-2, top: F
+  ['G2', 'D3', 'B3', 'F4'],   // G7    — drop-2, top: F (held over Dm7→G7)
+  ['C2', 'G2', 'B3', 'E4'],   // Cmaj7 — drop-2, top: E (half-step down from F)
+  ['A1', 'E3', 'G3', 'C4'],   // Am7   — drop-2, top: C (smooth from E)
 ]
+
+export function getProgression() { return PROGRESSION }
+export function getChordCount()  { return PROGRESSION.length }
 
 export function initPad(densityProfile, master) {
   voice = makePadVoice()

@@ -1,104 +1,96 @@
-import * as d3 from 'd3'
 import * as Tone from 'tone'
-import { getAudioDuration, getDataStart, getDataEnd } from '../audio/transport.js'
+import { getAnalyser } from '../audio/mixer.js'
+import { getAudioDuration } from '../audio/transport.js'
 
+// Music-driven visualization: renders the live audio output (waveform +
+// frequency spectrum) instead of plotting raw data points. Everything you see
+// here is sampled directly from the master bus, so the visuals are a literal
+// picture of the sound being produced.
+
+const H = 160
 const COLORS = {
-  commits:      '#7c6af7',
-  contributors: '#4fcfb4',
-  pulls:        '#f7c26a',
-  runs:         '#f76a6a',
+  wave:     '#7c6af7',
+  spec:     '#4fcfb4',
+  specGlow: 'rgba(79, 207, 180, 0.18)',
+  progress: 'rgba(255, 255, 255, 0.55)',
+  axis:     'rgba(255, 255, 255, 0.06)',
 }
 
-const H = 120
-let svg, playhead, xScale, raf
+let canvas, ctx, raf, width, audioDur, analyser
 
-export function initTimeline(container, data) {
+export function initTimeline(container) {
+  // Remove the old static SVG — the viz is now fully audio-driven.
   const svgEl = container.querySelector('#timeline-svg')
-  const width  = container.clientWidth || 900
+  if (svgEl) svgEl.remove()
 
-  svg = d3.select(svgEl)
-    .attr('width', width)
-    .attr('height', H)
+  width = container.clientWidth || 900
+  const dpr = window.devicePixelRatio || 1
 
-  const start = getDataStart()
-  const end   = getDataEnd()
+  canvas = document.createElement('canvas')
+  canvas.width  = width * dpr
+  canvas.height = H * dpr
+  canvas.style.width  = width + 'px'
+  canvas.style.height = H + 'px'
+  canvas.style.display = 'block'
+  container.appendChild(canvas)
 
-  xScale = d3.scaleLinear().domain([start, end]).range([20, width - 20])
+  ctx = canvas.getContext('2d')
+  ctx.scale(dpr, dpr)
 
-  // Commit dots
-  const commitG = svg.append('g')
-  commitG.selectAll('circle')
-    .data(data.commits)
-    .join('circle')
-      .attr('cx',  c => xScale(c.timestamp * 1000))
-      .attr('cy',  H * 0.35)
-      .attr('r',   c => Math.min(5, 1.5 + Math.log1p(c.linesAdded + c.linesDeleted) * 0.5))
-      .attr('fill', COLORS.commits)
-      .attr('opacity', 0.55)
+  // Idle frame so the panel isn't empty before play.
+  drawIdle()
+}
 
-  // PR bars (createdAt → mergedAt)
-  const pullsWithMerge = data.pulls.filter(p => p.mergedAt)
-  svg.append('g')
-    .selectAll('line')
-    .data(pullsWithMerge)
-    .join('line')
-      .attr('x1', p => xScale(new Date(p.createdAt).getTime()))
-      .attr('x2', p => xScale(new Date(p.mergedAt).getTime()))
-      .attr('y1', H * 0.6)
-      .attr('y2', H * 0.6)
-      .attr('stroke', COLORS.pulls)
-      .attr('stroke-width', 1.5)
-      .attr('opacity', 0.5)
-
-  // CI run dots
-  svg.append('g')
-    .selectAll('circle')
-    .data(data.runs)
-    .join('circle')
-      .attr('cx',   r => xScale(new Date(r.createdAt).getTime()))
-      .attr('cy',   H * 0.8)
-      .attr('r',    2.5)
-      .attr('fill', r => r.conclusion === 'success' ? COLORS.runs : '#fff')
-      .attr('opacity', 0.6)
-
-  // x-axis ticks (years)
-  const years = d3.timeYears(new Date(start), new Date(end))
-  svg.append('g')
-    .selectAll('text')
-    .data(years)
-    .join('text')
-      .attr('x', d => xScale(d.getTime()))
-      .attr('y', H - 4)
-      .attr('text-anchor', 'middle')
-      .attr('fill', '#555')
-      .attr('font-size', '9px')
-      .attr('font-family', 'monospace')
-      .text(d => d.getFullYear())
-
-  // Playhead
-  playhead = svg.append('line')
-    .attr('x1', 20).attr('x2', 20)
-    .attr('y1', 0).attr('y2', H)
-    .attr('stroke', '#fff')
-    .attr('stroke-width', 1.5)
-    .attr('opacity', 0.8)
-
-  return { xScale }
+function drawIdle() {
+  ctx.clearRect(0, 0, width, H)
+  ctx.strokeStyle = COLORS.axis
+  ctx.lineWidth = 1
+  ctx.beginPath()
+  ctx.moveTo(0, H / 2)
+  ctx.lineTo(width, H / 2)
+  ctx.stroke()
 }
 
 export function startPlayhead() {
-  const audioDur  = getAudioDuration()
-  const dataStart = getDataStart()
-  const dataEnd   = getDataEnd()
+  audioDur = getAudioDuration()
+  analyser = getAnalyser()
 
   function tick() {
-    const t        = Tone.getTransport().seconds
-    const fraction = t / audioDur
-    const dataTs   = dataStart + fraction * (dataEnd - dataStart)
-    if (xScale) {
-      const x = xScale(dataTs)
-      playhead?.attr('x1', x).attr('x2', x)
+    const wave = analyser.wave.getValue()
+    const fft  = analyser.fft.getValue()
+
+    ctx.clearRect(0, 0, width, H)
+
+    // --- Spectrum bars (bottom half) ---
+    const bars = fft.length
+    const bw   = width / bars
+    for (let i = 0; i < bars; i++) {
+      // FFT values are in dB, roughly -100..0. Map to 0..1.
+      const v = Math.max(0, Math.min(1, (fft[i] + 100) / 90))
+      const h = v * (H * 0.55)
+      ctx.fillStyle = `rgba(79, 207, 180, ${0.25 + v * 0.65})`
+      ctx.fillRect(i * bw, H - h, Math.max(1, bw - 1.5), h)
     }
+
+    // --- Waveform (centered, full width) ---
+    ctx.beginPath()
+    ctx.lineWidth = 1.6
+    ctx.strokeStyle = COLORS.wave
+    const N = wave.length
+    for (let i = 0; i < N; i++) {
+      const x = (i / (N - 1)) * width
+      const y = H / 2 + wave[i] * (H * 0.42)
+      if (i === 0) ctx.moveTo(x, y)
+      else         ctx.lineTo(x, y)
+    }
+    ctx.stroke()
+
+    // --- Progress strip (very bottom) ---
+    const t  = Tone.getTransport().seconds
+    const px = Math.min(width, (t / audioDur) * width)
+    ctx.fillStyle = COLORS.progress
+    ctx.fillRect(0, H - 2, px, 2)
+
     raf = requestAnimationFrame(tick)
   }
   raf = requestAnimationFrame(tick)
@@ -106,4 +98,5 @@ export function startPlayhead() {
 
 export function stopPlayhead() {
   if (raf) cancelAnimationFrame(raf)
+  raf = null
 }

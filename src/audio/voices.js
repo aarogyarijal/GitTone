@@ -7,7 +7,7 @@ export function makeCommitVoice() {
   const synth = new Tone.PolySynth(Tone.Synth, {
     oscillator: { type: 'triangle' },
     envelope:   { attack: 0.02, decay: 0.4, sustain: 0.5, release: 1.8 },
-    volume: -10,
+    volume: -1,
   })
   const gain = new Tone.Gain(1)
   synth.connect(gain)
@@ -28,9 +28,9 @@ export function makeContributorVoice(index) {
 
 export function makePullVoice() {
   const synth = new Tone.PolySynth(Tone.Synth, {
-    oscillator: { type: 'sine' },
-    envelope:   { attack: 1.2, decay: 1, sustain: 0.9, release: 9 },
-    volume: -18,
+    oscillator: { type: 'sawtooth' },
+    envelope:   { attack: 0.3, decay: 0.6, sustain: 0.75, release: 5 },
+    volume: -15,
   })
   const gain = new Tone.Gain(1)
   synth.connect(gain)
@@ -42,7 +42,7 @@ export function makeRunVoice() {
   const noise = new Tone.NoiseSynth({
     noise: { type: 'white' },
     envelope: { attack: 0.001, decay: 0.18, sustain: 0, release: 0.12 },
-    volume: -10,
+    volume: -15,
   })
   const gain = new Tone.Gain(1)
   kick.connect(gain)

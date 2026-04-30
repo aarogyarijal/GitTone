@@ -20,10 +20,16 @@ export function initContributors(contributors, master) {
     .sort((a, b) => b.total - a.total)
     .slice(0, 6)
 
+  const N = sorted.length
   sorted.forEach((contributor, idx) => {
     const voice  = makeContributorVoice(idx)
+    // Spread voices across the stereo field so simultaneous contributors don't
+    // mask each other — leftmost author at -0.6, rightmost at +0.6.
+    const panAmt = N > 1 ? -0.6 + idx * (1.2 / (N - 1)) : 0
+    const panner = new Tone.Panner(panAmt)
     const reverb = new Tone.Reverb({ decay: 2, wet: 0.3 }).connect(master)
-    voice.gain.connect(reverb)
+    voice.gain.connect(panner)
+    panner.connect(reverb)
     voices.push(voice)
 
     const pitchMidi = ROOT_MIDI + 12 + CHORD_DEGREES[idx % CHORD_DEGREES.length]

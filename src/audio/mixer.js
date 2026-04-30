@@ -4,6 +4,7 @@ import * as Tone from 'tone'
 // Layers plug into the input bus returned by initMixer / getMaster.
 
 let busIn, compressor, eq, reverbBus, limiter, stressFilter
+let waveAnalyser, fftAnalyser
 
 export function initMixer() {
   // Input bus (this is what layers connect to)
@@ -34,16 +35,23 @@ export function initMixer() {
   eq.connect(stressFilter)
   stressFilter.connect(reverbBus)
   reverbBus.connect(limiter)
+
+  // Audio-reactive analysers — tap the post-limiter signal so visuals follow
+  // exactly what the listener hears.
+  waveAnalyser = new Tone.Analyser('waveform', 1024)
+  fftAnalyser  = new Tone.Analyser('fft', 128)
+  limiter.fan(waveAnalyser, fftAnalyser)
   limiter.toDestination()
 
   return busIn
 }
 
 export function getMaster() { return busIn }
+export function getAnalyser() { return { wave: waveAnalyser, fft: fftAnalyser } }
 
 // level [0,1]: 0 = filter fully open (bright/full sound), 1 = filter nearly closed (muffled)
-export function setStressLevel(level) {
+export function setStressLevel(level, time) {
   if (!stressFilter) return
   const freq = 18000 - level * 14000
-  stressFilter.frequency.rampTo(freq, 1.5)
+  stressFilter.frequency.rampTo(freq, 1.5, time)
 }

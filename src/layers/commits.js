@@ -1,71 +1,141 @@
 import * as Tone from 'tone'
-import { makeCommitVoice } from '../audio/voices.js'
-import { midiToName, mapToNotes } from '../audio/scales.js'
-import { tsToAudio } from '../audio/transport.js'
+import { midiToName } from '../audio/scales.js'
+import { tsToAudio, quantizeTime } from '../audio/transport.js'
+import { getActiveChordMidi } from './pad.js'
 
-const FILE_TYPE_PAN = { js: -0.4, ts: -0.4, py: -0.3, rs: -0.2, md: 0.4, txt: 0.4, json: 0.2, css: 0.3 }
+// Commits are the melodic engine. Every musical decision pulls from the commit data:
+//   - file extension     → octave register + stereo pan + timbre brightness
+//   - churn (lines)      → chord-tone choice + velocity + note duration + FM modulation index
+//   - density (per slot) → bursts become ascending arpeggios on the active chord
+// All notes are chord-tones of whatever pad chord is sounding, so every commit sits in harmony.
 
-const MAX_PER_SECOND = 6   // cap density so peak seconds (125 commits in sec 89) become listenable.
+const EXT_PAN = { js: -0.4, ts: -0.4, py: -0.3, rs: -0.2, md: 0.4, txt: 0.4, json: 0.2, css: 0.3 }
 
-let voice = null
-let part  = null
+// Octave shift (semitones) added on top of the chord-tone base register.
+// Docs sit high and airy; code sits in the mid range; data files sit low.
+const EXT_OCT = { md: 24, txt: 24, json: 0, css: 12, js: 12, ts: 12, py: 12, rs: 12, html: 12 }
+
+// Per-extension timbre tweaks (FM modulation index, harmonicity).
+// Docs ring brighter/cleaner; data files come in darker; code sits in the middle.
+const EXT_TIMBRE = {
+  md:   { mod: 2,  harm: 3 },
+  txt:  { mod: 2,  harm: 3 },
+  json: { mod: 8,  harm: 1.5 },
+  css:  { mod: 4,  harm: 2 },
+  js:   { mod: 4,  harm: 2 },
+  ts:   { mod: 4,  harm: 2 },
+  py:   { mod: 5,  harm: 2 },
+  rs:   { mod: 6,  harm: 2 },
+}
+
+const MAX_PER_SECOND = 6
+
+let synth   = null
+let panner  = null
+let part    = null
 
 export function initCommits(commits, master) {
   if (!commits?.length) return
 
-  // Swap plain oscillator for an FM synth (frequency modulation) — richer, less harsh tone.
-  voice = makeCommitVoice()
-  voice.synth.dispose()
-  voice.synth = new Tone.PolySynth(Tone.FMSynth, {
+  synth = new Tone.PolySynth(Tone.FMSynth, {
     harmonicity: 2,
     modulationIndex: 4,
     oscillator: { type: 'triangle' },
-    envelope:   { attack: 0.02, decay: 0.4, sustain: 0.5, release: 1.8 },
+    envelope:   { attack: 0.01, decay: 0.35, sustain: 0.35, release: 1.4 },
     modulation: { type: 'sine' },
-    modulationEnvelope: { attack: 0.5, decay: 0.5, sustain: 0.2, release: 1.2 },
-    volume: -12,
+    modulationEnvelope: { attack: 0.02, decay: 0.4, sustain: 0.2, release: 1.0 },
+    volume: -11,
   })
 
-  const panner = new Tone.Panner(0)
-  const reverb = new Tone.Reverb({ decay: 2, wet: 0.25 }).connect(master)
-  voice.synth.connect(panner)
+  panner = new Tone.Panner(0)
+  const reverb = new Tone.Reverb({ decay: 2.4, wet: 0.28 }).connect(master)
+  synth.connect(panner)
   panner.connect(reverb)
-  voice.gain.disconnect()
 
-  // Note pitch (frequency) driven by commit churn size
-  const churns = commits.map(c => c.linesAdded || c.linesDeleted || 1)
-  const notes  = mapToNotes(churns, { scaleName: 'dorian', root: 'D', octaves: 3, useLog: true })
+  const churns  = commits.map(c => (c.linesAdded || 0) + (c.linesDeleted || 0) || 1)
+  const logCh   = churns.map(c => Math.log1p(c))
+  const minL    = Math.min(...logCh)
+  const maxL    = Math.max(...logCh)
+  const range   = (maxL - minL) || 1
 
-  const allEvents = commits.map((c, i) => {
-    const ext = dominantExtension(c.files || [])
-    const pan = FILE_TYPE_PAN[ext] ?? 0
-    const churn = c.linesAdded + c.linesDeleted
-    const vel = Math.min(1, 0.3 + Math.log1p(churn) / 10)
+  // Build raw events (one per commit).
+  const raw = commits.map((c, i) => {
+    const ext     = dominantExtension(c.files || [])
+    const churnN  = (logCh[i] - minL) / range                                    // 0..1
+    const time    = quantizeTime(tsToAudio(c.timestamp * 1000), '16n')
+    const chord   = getActiveChordMidi(time)
+    const toneIdx = pickChordToneIdx(churnN, chord.length)
+    const baseMidi = (chord[toneIdx] % 12) + 48                                  // park in C3..B3 register
+    const midi    = baseMidi + (EXT_OCT[ext] ?? 12)
+    const timbre  = EXT_TIMBRE[ext] ?? { mod: 4, harm: 2 }
     return {
-      time:     tsToAudio(c.timestamp * 1000),
-      note:     midiToName(notes[i]),
-      velocity: vel,
-      pan,
-      duration: '8n',
+      time,
+      ext,
+      midi,
+      churnN,
+      pan:      EXT_PAN[ext] ?? 0,
+      velocity: 0.35 + Math.pow(churnN, 0.6) * 0.55,                             // square-rooted dynamics curve
+      duration: churnN < 0.3 ? '16n' : churnN < 0.7 ? '8n' : '4n',               // big commits sustain
+      modIndex: timbre.mod + churnN * 6,                                         // loud commits get brassier
+      harm:     timbre.harm,
     }
   })
 
-  // Density cap: keep at most MAX_PER_SECOND commits per audio second,
-  // prioritized by velocity (loudest churn wins).
-  const events = thinByDensity(allEvents, MAX_PER_SECOND)
+  // Group by 16n slot. Within a crowded slot, spread the events into an
+  // ascending arpeggio across consecutive 16ths instead of stacking them.
+  const slotted = new Map()
+  for (const ev of raw) {
+    const key = Math.round(ev.time / 0.125)
+    if (!slotted.has(key)) slotted.set(key, [])
+    slotted.get(key).push(ev)
+  }
 
-  // Add tiny random time/volume jitter so rapid bursts don't sound like a perfectly aligned grid.
+  const events = []
+  for (const [slot, arr] of slotted.entries()) {
+    arr.sort((a, b) => b.velocity - a.velocity)
+    const keep = arr.slice(0, MAX_PER_SECOND)                                    // drop the quietest if overcrowded
+    if (keep.length === 1) {
+      events.push(keep[0])
+    } else {
+      // Arpeggiate: re-pitch the cluster to ascending chord tones, spread across 16ths.
+      const chord = getActiveChordMidi(keep[0].time)
+      keep.sort((a, b) => a.churnN - b.churnN)                                   // small churn at bottom of arp
+      keep.forEach((ev, i) => {
+        const tone = chord[i % chord.length] % 12
+        const octBoost = Math.floor(i / chord.length) * 12
+        ev.time = slot * 0.125 + i * 0.125
+        ev.midi = 48 + tone + (EXT_OCT[ev.ext] ?? 12) + octBoost
+        ev.duration = '16n'
+        ev.velocity = Math.min(1, ev.velocity * 0.85)                             // arpeggio hits softer than solo notes
+        events.push(ev)
+      })
+    }
+  }
+
+  events.sort((a, b) => a.time - b.time)
+
+  // Tiny humanization so quantized notes don't feel mechanical.
   for (const ev of events) {
-    ev.time     += (Math.random() - 0.5) * 0.04
-    ev.velocity *= 0.9 + Math.random() * 0.2
+    ev.time     += (Math.random() - 0.5) * 0.015
+    ev.velocity *= 0.92 + Math.random() * 0.16
   }
 
   part = new Tone.Part((time, ev) => {
     panner.pan.setValueAtTime(ev.pan, time)
-    voice.synth.triggerAttackRelease(ev.note, ev.duration, time, ev.velocity)
+    synth.set({ modulationIndex: ev.modIndex, harmonicity: ev.harm })
+    synth.triggerAttackRelease(midiToName(ev.midi), ev.duration, time, ev.velocity)
   }, events.map(e => [Math.max(0, e.time), e]))
 
   part.start(0)
+}
+
+// Pick which chord tone to play. Small commits land on root/5th (consonant),
+// medium on 3rd/7th (chord identity), large on the highest tones (color).
+function pickChordToneIdx(churnN, chordLen) {
+  if (churnN < 0.3)  return 0
+  if (churnN < 0.55) return Math.min(chordLen - 1, 2)
+  if (churnN < 0.85) return Math.min(chordLen - 1, 1)
+  return chordLen - 1
 }
 
 function dominantExtension(files) {
@@ -75,20 +145,4 @@ function dominantExtension(files) {
     counts[ext] = (counts[ext] || 0) + 1
   }
   return Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? 'js'
-}
-
-// Bucket events into 1-sec bins; keep top-N by velocity in each bin.
-function thinByDensity(events, maxPerBin) {
-  const bins = new Map()
-  for (const ev of events) {
-    const k = Math.floor(ev.time)
-    if (!bins.has(k)) bins.set(k, [])
-    bins.get(k).push(ev)
-  }
-  const kept = []
-  for (const arr of bins.values()) {
-    arr.sort((a, b) => b.velocity - a.velocity)
-    kept.push(...arr.slice(0, maxPerBin))
-  }
-  return kept.sort((a, b) => a.time - b.time)
 }

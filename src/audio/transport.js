@@ -25,3 +25,11 @@ export function tsToAudio(unixMs) {
 export function getAudioDuration() { return _audioDur }
 export function getDataStart()     { return _dataStart }
 export function getDataEnd()       { return _dataEnd }
+
+// Snap a time (seconds) to the nearest beat grid step.
+// At 120 BPM: 16n = 0.125s, 8n = 0.25s, 4n = 0.5s.
+const GRID_SECS = { '16n': 0.125, '8n': 0.25, '4n': 0.5, '2n': 1.0 }
+export function quantizeTime(timeSec, grid = '16n') {
+  const step = GRID_SECS[grid] ?? 0.125
+  return Math.round(timeSec / step) * step
+}

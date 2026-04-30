@@ -1,6 +1,6 @@
 import * as Tone from 'tone'
 import { makeRunVoice } from '../audio/voices.js'
-import { tsToAudio } from '../audio/transport.js'
+import { tsToAudio, quantizeTime } from '../audio/transport.js'
 import { setStressLevel } from '../audio/mixer.js'
 
 const MAX_PER_SECOND = 24
@@ -18,7 +18,7 @@ export function initRuns(runs, master) {
     const recent = sorted.slice(Math.max(0, i - 9), i + 1)
     const failRate = recent.filter(r => r.conclusion === 'failure').length / recent.length
     return {
-      time:    tsToAudio(new Date(run.createdAt).getTime()),
+      time:    quantizeTime(tsToAudio(new Date(run.createdAt).getTime()), '16n'),
       success: run.conclusion === 'success',
       failRate,
       weight:  run.conclusion === 'failure' ? 2 : 1,   // failures matter more
@@ -29,7 +29,7 @@ export function initRuns(runs, master) {
   allEvents = thinByDensity(allEvents, MAX_PER_SECOND)
 
   part = new Tone.Part((time, ev) => {
-    setStressLevel(ev.failRate)
+    setStressLevel(ev.failRate, time)
     if (ev.success) {
       voice.kick.triggerAttackRelease('C1', '4n', time, 0.7)
     } else {
